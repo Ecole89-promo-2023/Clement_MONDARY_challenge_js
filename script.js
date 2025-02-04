@@ -1,19 +1,10 @@
-// Initial static data
-let todos = [
-    { id: 1, title: "Promener le chien", completed: false },
-    { id: 2, title: "Faire les courses", completed: false },
-    { id: 3, title: "Chercher les enfants à l'école", completed: true },
-    { id: 4, title: "Réserver le restaurant", completed: false },
-    { id: 5, title: "Nettoyer le garage", completed: true }
-];
-
-// DOM elements
+// Pointeurs sur les boutons et le tableau de listes
 const todoList = document.getElementById('todoList');
 const showCompleted = document.getElementById('showCompleted');
 const showUncompleted = document.getElementById('showUncompleted');
 const showAll = document.getElementById('showAll');
 
-// Render todos
+// Fonction qui genere un element de tableau pour chaque élément d'un json (id, titre, état)
 function renderTodos(todosToRender) {
     todoList.innerHTML = todosToRender.map(todo => `
         <tr class="${todo.completed ? 'bg-gray-100' : 'bg-white'}">
@@ -24,8 +15,7 @@ function renderTodos(todosToRender) {
                     <input type="checkbox" 
                            class="form-checkbox h-5 w-5 text-blue-600" 
                            ${todo.completed ? 'checked' : ''}
-                           onchange="toggleTodo(${todo.id})"
-                    >
+                           onchange="toggleTodo(${todo.id})">
                     <span class="ml-2">${todo.completed ? 'terminée' : 'en cours'}</span>
                 </label>
             </td>
@@ -33,15 +23,16 @@ function renderTodos(todosToRender) {
     `).join('');
 }
 
-// Toggle todo status
+// Fonction qui modifie l'etat de la tâche lorsque l'input est coché/décoché
 function toggleTodo(id) {
-    todos = todos.map(todo => 
-        todo.id === id ? {...todo, completed: !todo.completed} : todo
+    todos = todos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
     renderTodos(todos);
 }
 
-// Filter handlers
+
+// CLick sur les boutons
 showCompleted.addEventListener('click', () => {
     renderTodos(todos.filter(todo => todo.completed));
 });
@@ -54,10 +45,13 @@ showAll.addEventListener('click', () => {
     renderTodos(todos);
 });
 
+
+// On va chercher la data de jsonplaceholder, que l'on rend dans renderTodos
 async function fetchTodos() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/todos');
         const data = await response.json();
+        console.log(data);
         todos = data;
         renderTodos(todos);
     } catch (error) {
@@ -65,6 +59,5 @@ async function fetchTodos() {
     }
 }
 
-renderTodos(todos);
-
+// On faut un simple appelle sur fetchTodos, puis les eventListeners gèrent le reste
 fetchTodos();
