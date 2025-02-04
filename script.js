@@ -31,7 +31,6 @@ function toggleTodo(id) {
     renderTodos(todos);
 }
 
-
 // CLick sur les boutons
 showCompleted.addEventListener('click', () => {
     renderTodos(todos.filter(todo => todo.completed));
@@ -44,7 +43,6 @@ showUncompleted.addEventListener('click', () => {
 showAll.addEventListener('click', () => {
     renderTodos(todos);
 });
-
 
 // On va chercher la data de jsonplaceholder, que l'on rend dans renderTodos
 async function fetchTodos() {
@@ -59,5 +57,5 @@ async function fetchTodos() {
     }
 }
 
-// On faut un simple appelle sur fetchTodos, puis les eventListeners gèrent le reste
+// On faut un simple appelle sur fetchTodos, puis les eventListeners et fetchTodo gèrent le reste
 fetchTodos();
