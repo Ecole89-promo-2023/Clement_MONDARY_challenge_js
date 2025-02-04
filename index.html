@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="flex gap-4 mb-8">
+            <button id="showCompleted" class="flex-1 bg-green-600 text-white py-3 px-4 rounded hover:bg-green-700">
+                Afficher les tâches complétées
+            </button>
+            <button id="showUncompleted" class="flex-1 bg-red-600 text-white py-3 px-4 rounded hover:bg-red-700">
+                Afficher les tâches non complétées
+            </button>
+            <button id="showAll" class="flex-1 bg-blue-600 text-white py-3 px-4 rounded hover:bg-blue-700">
+                Afficher toutes les tâches
+            </button>
+        </div>
+
+        <div class="bg-white rounded-lg shadow">
+            <table class="w-full">
+                <thead>
+                    <tr class="border-b">
+                        <th class="py-4 px-6 text-left">Id</th>
+                        <th class="py-4 px-6 text-left">Tâches</th>
+                        <th class="py-4 px-6 text-right">Statut</th>
+                    </tr>
+                </thead>
+                <tbody id="todoList">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
